@@ -5,7 +5,7 @@ SRCS=$(wildcard $(SRCDIR)/*.cpp)
 # The directory to store the compiled .o files.
 OBJDIR=obj
 
-# The .o files. One per cpp file. Put them in the obj directory.
+# The .o files. One per cc file. Put them in the obj directory.
 OBJECTS=$(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 
 # The flags you want to use when compiling individual objects (.o files)
@@ -16,21 +16,20 @@ OBJECTS=$(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 # -std=c++03=Enforce C++03 standard compliance. (You could also use C++11 if you
 #  want to be more up-to-date).
 # -MMD=Create a .d file to store the rule for the header dependencies of each object.
-CFLAGS=-g -Wall -Wextra -std=c++11 -MMD 
-CFLAGS+=-ISDL/include -I../boost_1_55_0
+CFLAGS=-g -Wall -Wextra -std=c++11 -MMD `sdl2-config --cflags`
 
 # LDLIBS (Load Libraries)
 # External libraries you are using that need to be linked.
 # ``=run a shell command (command substitution)
 # sdl-config=a command that generates the load libs/cflags necessary depending
 # on the platform (OS/Linux/Win)
-LDLIBS=-L/SDL/lib/x86 -lboost_system -lboost_filesystem
+LDLIBS=`sdl2-config --libs` -lboost_system -lboost_filesystem
 
 # LDFLAGS (Load/linker flags)
 LDFLAGS=
 
 # The C++ compiler you are using.
-CC=clang++
+CC=g++
 
 # The directory to put the executable.
 BINDIR=bin
@@ -46,7 +45,7 @@ EXECUTABLE=cavestory.exe
 all: $(EXECUTABLE)
 
 # Pastes in all of the Make rules inside of the generated .d files.
-# Rules are of the format (file.o: file.cpp header1.h header2.h)
+# Rules are of the format (file.o: file.cc header1.h header2.h)
 # Each .d file gets generated whenever its .o file is compiled.
 # Special thanks to /u/yuriks for pointing this out to me!
 -include $(OBJECTS:.o=.d)
@@ -72,7 +71,7 @@ $(OBJDIR)/%.o: %.cpp
 # Deletes all .o/.d files and the executable. This helps when you want to
 # force recompilation.
 clean:
-	rm -rf obj gen
+	rm -rf obj bin
 
 # Just a nice way of running the game. (Since you have to be in the bindir for
 # the content to load properly)
