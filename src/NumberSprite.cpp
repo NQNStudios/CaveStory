@@ -5,7 +5,7 @@
 
 namespace
 {
-	const std::string kSpritePath = "TextBox.bmp";
+	const std::string kSpritePath = "content/TextBox.bmp";
 
 	const units::Game kSourceRedY = 8 * units::kHalfTile;
 	const units::Game kSourceWhiteY = 7 * units::kHalfTile;

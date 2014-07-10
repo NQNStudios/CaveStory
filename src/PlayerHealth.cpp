@@ -27,7 +27,7 @@ namespace
 	const units::Game kHealthNumberY = units::tileToGame(2);
 	const int kHealthNumberNumDigits = 2;
 
-	const std::string kSpritePath("TextBox.bmp");
+	const std::string kSpritePath("content/TextBox.bmp");
 
 	const units::MS kDamageDelay = 1500;
 }

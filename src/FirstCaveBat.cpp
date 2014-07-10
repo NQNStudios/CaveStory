@@ -54,7 +54,7 @@ void FirstCaveBat::initializeSprite(Graphics& graphics,
 	units::Tile tile_y = sprite_state.facing == RIGHT ? 3 : 2;
 
 	sprites_[sprite_state] = boost::shared_ptr<Sprite>(new AnimatedSprite(
-		graphics, "NpcCemet.bmp", units::tileToPixel(2), units::tileToPixel(tile_y),
+		graphics, "content/NpcCemet.bmp", units::tileToPixel(2), units::tileToPixel(tile_y),
 		units::tileToPixel(1), units::tileToPixel(1), kFlyFps, kNumFlyFrames));
 }
 
